@@ -288,6 +288,8 @@
 
     var beginning = null;
 
+    var bridgeshape = document.getElementById('bridgeshape');
+
     function step(timestamp) {
       if (!beginning) beginning = timestamp;
 
@@ -298,13 +300,14 @@
 
       var nextValue = Math.floor(noEasing(progress, propertyStart, propertyDestination - propertyStart, duration));
 
+      bridgeshape.setAttribute('d', 'M 10 80 V 10 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 10 80');
+
+
       console.log('--------------');
       console.log('beginning: ' + beginning);
       console.log('timestamp: ' + timestamp);
       console.log('progress: ' + progress);
-      console.log('nextValue: ' + nextValue);
-
-      // setattribute
+      console.log('nextValue: ' + nextValue);      
 
       if (progress < duration) {
         requestAnimationFrame(step);
