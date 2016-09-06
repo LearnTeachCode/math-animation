@@ -26,11 +26,12 @@
 
     .refresh {
       background: rgb(71, 79, 105);
-      max-width: 22em;
+      max-width: 25em;
       margin-left: auto;
       margin-right: auto;
-      padding: 1.5em;
+      /*padding: 1.5em;*/
       text-align: center;
+
     }
     .refresh svg {
       display: block;
@@ -112,6 +113,11 @@
       margin-left: -1.5em;
     }
 
+    #bridgecontainer {
+      width: 100%;      
+      height: auto;
+      background: #fff;
+    }
   </style>
 
 </head>
@@ -122,6 +128,20 @@
   </header>
 
   <div class="refresh">
+
+    <!-- https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths -->
+    <svg id="bridgecontainer" viewbox="0 0 180 160" width="180" height="160" xmlns="http://www.w3.org/2000/svg">
+
+      <style type="text/css">
+            #bridgeshape {
+              fill: rgb(71, 79, 105);          
+            }        
+      </style>
+
+      <path id="bridgeshape" d="M 0 80 V 0 H 180 V 80 M180 80 Q 95 80 0 80" />
+    </svg>
+
+
     <svg xmlns="http://www.w3.org/2000/svg" width="52" height="80" viewBox="0 0 17.3 26.6">
       <!--
         Created by Guilherme Simoes
@@ -189,20 +209,7 @@
     -->
   </div>
 
-<!-- BEZIER CURVE test, CREDIT: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths --> 
 
-<svg width="190" height="160" xmlns="http://www.w3.org/2000/svg">
-
-  <style type="text/css">
-        #bridgeshape {
-          fill: rgb(71, 79, 105);          
-        }        
-  </style>
-
-  <path id="bridgeshape" d="M 10 80 V 10 H 180 V 80 M180 80 Q 95 10 10 80" />
-</svg>
-
-<!-- END   BEZIER CURVE test --> 
   <ul>
     <li>
       <div class="image"></div>
@@ -244,22 +251,22 @@
 
   <script>
   
-  var refresh = document.querySelector('.refresh');
-  document.body.className += ' inactive';
-  setTimeout(function() {
-    document.body.className += ' animated';
-  }, 1);
+  // var refresh = document.querySelector('.refresh');
+  // document.body.className += ' inactive';
+  // setTimeout(function() {
+  //   document.body.className += ' animated';
+  // }, 1);
 
-  document.body.addEventListener('click', function() {
-    document.body.className = document.body.className.replace(/inactive/g, '');
-    setTimeout(function() {
-      document.body.className += ' lift-off';
-      setTimeout(function() {
-        document.body.className += ' inactive';
-        document.body.className = document.body.className.replace(/lift-off/g, '');
-      }, 1000);
-    }, 1000);
-  }, false);
+  // document.body.addEventListener('click', function() {
+  //   document.body.className = document.body.className.replace(/inactive/g, '');
+  //   setTimeout(function() {
+  //     document.body.className += ' lift-off';
+  //     setTimeout(function() {
+  //       document.body.className += ' inactive';
+  //       document.body.className = document.body.className.replace(/lift-off/g, '');
+  //     }, 1000);
+  //   }, 1000);
+  // }, false);
 
   </script>
 
@@ -278,7 +285,7 @@
     }
 
     // http://gsgd.co.uk/sandbox/jquery/easing/
-    function easeOutElastic (x, t, b, c, d) {
+    function easeOutElastic (t, b, c, d) {
       var s=1.70158;var p=0;var a=c;
       if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
       if (a < Math.abs(c)) { a=c; var s=p/4; }
@@ -286,21 +293,54 @@
       return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
     }
 
+    function easeInQuint (t, b, c, d) {
+      return c*(t/=d)*t*t*t*t + b;
+    }
+
     var beginning = null;
 
     var bridgeshape = document.getElementById('bridgeshape');
 
-    function step(timestamp) {
+    // function step(timestamp) {
+    //   if (!beginning) beginning = timestamp;
+
+    //   var propertyStart = 130;
+    //   var propertyDestination = 80;
+    //   var progress = timestamp - beginning;
+    //   var duration = 1000;
+
+    //   var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+
+    //   bridgeshape.setAttribute('d', 'M 10 80 V 10 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 10 80');
+
+
+    //   console.log('--------------');
+    //   console.log('beginning: ' + beginning);
+    //   console.log('timestamp: ' + timestamp);
+    //   console.log('progress: ' + progress);
+    //   console.log('nextValue: ' + nextValue);      
+
+    //   if (progress < duration) {
+    //     requestAnimationFrame(step);
+    //   }
+    // }
+    // requestAnimationFrame(step);
+
+
+
+
+
+  function step(timestamp) {
       if (!beginning) beginning = timestamp;
 
-      var propertyStart = 0;
-      var propertyDestination = 90;
+      var propertyStart = 80;
+      var propertyDestination = 130;
       var progress = timestamp - beginning;
-      var duration = 2000;
+      var duration = 1000;
 
-      var nextValue = Math.floor(noEasing(progress, propertyStart, propertyDestination - propertyStart, duration));
+      var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
-      bridgeshape.setAttribute('d', 'M 10 80 V 10 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 10 80');
+      bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
 
 
       console.log('--------------');
@@ -314,6 +354,8 @@
       }
     }
     requestAnimationFrame(step);
+
+
 
 
     /*
