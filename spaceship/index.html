@@ -189,6 +189,20 @@
     -->
   </div>
 
+<!-- BEZIER CURVE test, CREDIT: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths --> 
+
+<svg width="190" height="160" xmlns="http://www.w3.org/2000/svg">
+
+  <style type="text/css">
+        #bridgeshape {
+          fill: rgb(71, 79, 105);          
+        }        
+  </style>
+
+  <path id="bridgeshape" d="M 10 80 V 10 H 180 V 80 M180 80 Q 95 10 10 80" />
+</svg>
+
+<!-- END   BEZIER CURVE test --> 
   <ul>
     <li>
       <div class="image"></div>
@@ -229,7 +243,7 @@
   </ul>
 
   <script>
-
+  
   var refresh = document.querySelector('.refresh');
   document.body.className += ' inactive';
   setTimeout(function() {
