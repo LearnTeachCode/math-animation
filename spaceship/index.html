@@ -9,6 +9,79 @@
 
     body {
       margin: 0;
+      background: rgb(92, 96, 129);
+    }
+
+    header {
+      background: rgb(169, 206, 203);
+      min-height: 4.5em;
+    }
+    header h1 {
+      margin: 0;
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+
+    .refresh {
+      background: rgb(71, 79, 105);
+      max-width: 22em;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1.5em;
+      text-align: center;
+    }
+    *[role="status"] {
+      background: rgb(71, 79, 105);
+    }
+
+    ul,
+    li {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    ul {
+      margin-top: 0;
+      background: white;
+      max-width: 22em;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1.5em;
+    }
+
+    li {
+      margin-top: 3em;
+      position: relative;
+    }
+    li h2,
+    li p {
+      background: rgb(220, 235, 234);
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+    li h2 {
+      margin-bottom: 0;
+      border-top-left-radius: 0.25em;
+      border-top-right-radius: 0.25em;
+      min-height: 3em;
+      font-size: inherit;
+    }
+    li p {
+      margin-top: 0.375em;
+      border-bottom-left-radius: 0.25em;
+      border-bottom-right-radius: 0.25em;
+      min-height: 9em;
+    }
+    li .image {
+      background: rgb(169, 206, 203);
+      border-radius: 50%;
+      width: 3em;
+      height: 3em;
+      position: absolute;
+      top: -1.5em;
+      left: 50%;
+      margin-left: -1.5em;
     }
 
   </style>
@@ -17,17 +90,54 @@
 <body>
 
   <header>
-    <h1>Chat</h1>
+    <h1>Messages</h1>
   </header>
 
-  <p role="status">Refreshing…</p>
+  <div class="refresh">
+    <script type="text/template" id="refresh-status-template">
+      <p role="status">Refreshing…</p>
+    </script>
 
-  <button type="button">Refresh</button>
+    <button type="button">Refresh</button>
+  </div>
 
   <ul>
-    <li>Post A</li>
-    <li>Post B</li>
-    <li>Post C</li>
+    <li>
+      <div class="image"></div>
+      <h2>Lorem ipsum dolor sit amet</h2>
+      <p>Consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.</p>
+    </li>
+    <li>
+      <div class="image"></div>
+      <h2>Ut enim ad minim veniam</h2>
+      <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur.</p>
+    </li>
+    <li>
+      <div class="image"></div>
+      <h2>Excepteur sint occaecat cupidatat non</h2>
+      <p>Proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </li>
+    <li>
+      <div class="image"></div>
+      <h2>Lorem ipsum dolor sit amet</h2>
+      <p>Consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.</p>
+    </li>
+    <li>
+      <div class="image"></div>
+      <h2>Ut enim ad minim veniam</h2>
+      <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur.</p>
+    </li>
+    <li>
+      <div class="image"></div>
+      <h2>Excepteur sint occaecat cupidatat non</h2>
+      <p>Proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </li>
   </ul>
 
   <script>
