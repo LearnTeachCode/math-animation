@@ -263,5 +263,75 @@
 
   </script>
 
+  <script>
+
+
+    // http://upshots.org/actionscript/jsas-understanding-easing
+    /*
+    @t is the current time (or position) of the tween. This can be seconds or frames, steps, seconds, ms, whatever – as long as the unit is the same as is used for the total time [3].
+    @b is the beginning value of the property.
+    @c is the change between the beginning and destination value of the property.
+    @d is the total time of the tween.
+    */
+    function noEasing (t, b, c, d) {
+      return c * (t / d) + b;
+    }
+
+    // http://gsgd.co.uk/sandbox/jquery/easing/
+    function easeOutElastic (x, t, b, c, d) {
+      var s=1.70158;var p=0;var a=c;
+      if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
+      if (a < Math.abs(c)) { a=c; var s=p/4; }
+      else var s = p/(2*Math.PI) * Math.asin (c/a);
+      return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+    }
+
+    var beginning = null;
+
+    function step(timestamp) {
+      if (!beginning) beginning = timestamp;
+
+      var propertyStart = 0;
+      var propertyDestination = 90;
+      var progress = timestamp - beginning;
+      var duration = 2000;
+
+      var nextValue = Math.floor(noEasing(progress, propertyStart, propertyDestination - propertyStart, duration));
+
+      console.log('--------------');
+      console.log('beginning: ' + beginning);
+      console.log('timestamp: ' + timestamp);
+      console.log('progress: ' + progress);
+      console.log('nextValue: ' + nextValue);
+
+      // setattribute
+
+      if (progress < duration) {
+        requestAnimationFrame(step);
+      }
+    }
+    requestAnimationFrame(step);
+
+
+    /*
+    var start = null;
+    var element = document.getElementById("SomeElementYouWantToAnimate");
+    element.style.position = 'absolute';
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = timestamp - start;
+      element.style.left = Math.min(progress/10, 200) + "px";
+      if (progress < 2000) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
+    */
+
+
+  </script>
+
 </body>
 </html>
