@@ -31,14 +31,26 @@
       margin-right: auto;
       /*padding: 1.5em;*/
       text-align: center;
-
+      position: relative;
+      /* animate margin-top:-200px or something; */
     }
+
     .refresh svg {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+      display:block;
+    }
+
+    #bridgecontainer {
+      width: 100%;      
+      height: 355.56px;
+      background: #fff;
+    }
+    .refresh svg#spaceship {      
       height: 5em; /* 80px / 16px */
       width: 3.25em; /* 52px / 16px */
+      position: absolute;
+      top: 200px;
+      left: 50%;
+      margin-left: -1.125em;
     }
 
     .animated .refresh {
@@ -112,12 +124,6 @@
       left: 50%;
       margin-left: -1.5em;
     }
-
-    #bridgecontainer {
-      width: 100%;      
-      height: auto;
-      background: #fff;
-    }
   </style>
 
 </head>
@@ -142,7 +148,7 @@
     </svg>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="52" height="80" viewBox="0 0 17.3 26.6">
+    <svg id="spaceship" xmlns="http://www.w3.org/2000/svg" width="52" height="80" viewBox="0 0 17.3 26.6">
       <!--
         Created by Guilherme Simoes
         from the Noun Project
