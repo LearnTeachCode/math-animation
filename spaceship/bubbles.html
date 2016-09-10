@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+
+  <title>Space ship pull to refersh</title>
+
+  <style>
+
+    body {
+      margin: 0;
+      background: rgb(92, 96, 129);
+    }
+
+    .refresh {
+      background: rgb(71, 79, 105);
+      max-width: 22em;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1.5em;
+      text-align: center;
+      height: 10em;
+    }
+
+  </style>
+
+  <style>
+
+    @keyframes float {
+      to {
+        transform: translateY(100px);
+      }
+    }
+
+    .bubble {
+      background: rgba(69, 111, 168, 0.9);
+      border-radius: 50%;
+      width: 1.5em;
+      height: 1.5em;
+      display: inline-block;
+      animation: float 1s both linear;
+    }
+
+    .bubble:nth-child(2) {
+      font-size: 0.75em;
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .bubble:nth-child(3) {
+      font-size: 1.25em;
+      background: rgba(144, 179, 221, 0.75);
+    }
+    .bubble:nth-child(4) {
+      font-size: 1.125em;
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .bubble:nth-child(5) {
+      font-size: 0.65em;
+      background: rgba(144, 179, 221, 0.25);
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <div class="refresh">
+
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+  </div>
+
+</body>
+</html>
