@@ -1,50 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+	<title>CSS Animation Slides</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/white-customized.css" id="theme">
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
 
-		<title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<div class="reveal">
+		<div class="slides">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- - - - - - - - - - - MAJOR SECTION SEPARATOR - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+			<section>
+				<h1>Template slide 1</h1>
+			</section>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+			<section>
+				<h2>Template slide 2</h2>
+			</section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+			<section>
+				<h3>Template slide 3</h3>
+			</section>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+
+			<!-- 	COMMON ELEMENTS:
+				<h2 class="subhead"></h2>
+				<h2 class="big"></h2>
+
+				<p class="small">
+					SMALL font if lots of text
+				</p>
+
+				<p class="fragment highlight-current-blue">
+					FRAGMENTS - highlight one at a time, best to keep them all visible I think though!
+				</p>
+
+
+				<p>
+					INLINE CODE BELOW:
+				</p>
+				<pre><code contenteditable="">some inline code here</code></pre>
+
+				<pre><code class="smaller js" data-trim contenteditable="">
+{big block of inline code here, and
+REMEMBER TO KEEP IT ALL THE WAY TO THE LEFT!
+
+*** AND REMEMBER TO INCLUDE A CLASS NAME TO SPECIFY WHICH LANGUAGE (how to highlight it)
+				</code></pre>
+
+
+				<img width="60%" src="">
+				<img class="noborder noshadow" src="">
+
+				<iframe style="margin-top: 50px; height: 300px;" src""></iframe>
+
+
+				<blockquote style="text-align:left; padding:20px;">
+					<p>
+						QUOTES ARE GREAT!
+					</p>
+					<p style="text-align:right;">
+						-- ATTRIBUTION!
+					</p>
+				</blockquote>
+
+				<p class="nomargin"><cite>
+					Small CITE text for image credits or footnotes
+				</cite></p>
+
+				<div class="fourths">
+				</div>
+
+				<div class="halves" style="width:35%">
+				</div>
+				<img class="halves noshadow noborder nomargin" style="width:65%" src="">
+
+				<ol start="5" class="listspaces">
+					<li>Numbered lists across multiple slides!</li>
+					<li>LISTSPACES class to add margin below list items</li>
+				</ol>
+			-->
+
+		</div><!-- END .slides -->
+	</div><!-- END .reveal -->
+
+	<footer class="branding">
+		<a class="button" href="#">Sample Code***UPDATE LINK</a>
+		<a class="button" href="#">Slides***UPDATE LINK</a>
+		<cite>By <a href="https://twitter.com/LearningNerd">Liz Krane</a> and By <a href="https://twitter.com/jimthoburn">Jim Thoburn</a> for <a href="http://www.meetup.com/LearnToCodeLA/">Learn to Code LA</a></cite>
+	</footer>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="reveal.js"></script>
+
+	<script>
+	Reveal.initialize({
+		dependencies: [
+			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+			{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } }
+		]
+	});
+	</script>
+
+</body>
 </html>
