@@ -98,6 +98,7 @@
         	beginning2 = null;
         	requestAnimationFrame(step2);
         }, 500);
+        return;
       }
       var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
