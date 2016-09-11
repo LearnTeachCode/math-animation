@@ -83,11 +83,51 @@
 			</section>
 
 			<section>
-				<h3>Particles!!</h3>
+				<h3>Particles!! Yay Bubbles</h3>
+
+				<div class="halves">
+					<iframe class="halves" style="height: 500px;" src="spaceship/bubbles.html"></iframe>
+				</div>
+				<div class="halves">
+					<pre><code class="smaller" data-trim contenteditable="">
+.bubble {
+  background: rgba(69, 111, 168, 0.9);
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  animation: float 1s both linear;
+}
+				</code></pre>
+				</div>
+
 			</section>
 
 			<section>
 				<h3>Motion blur</h3>
+
+				<div class="halves">
+					<iframe class="halves" style="height: 500px;" src="spaceship/motion.html"></iframe>
+				</div>
+				<div class="halves">
+					<pre><code class="smaller" data-trim contenteditable="">
+&lt;style&gt;
+.spaceship-container {
+  padding: 12px; /* Same value as the stdDeviation attribute of the SVG */
+  -webkit-filter: url(&quot;#blur&quot;);
+  filter: url(&quot;#blur&quot;);
+}
+&lt;/style&gt;
+
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot;&gt;
+  &lt;defs&gt;
+&Tab;&lt;filter id=&quot;blur&quot;&gt;
+&Tab;  &lt;feGaussianBlur in=&quot;SourceGraphic&quot; stdDeviation=&quot;0,12&quot; /&gt;
+&Tab;&lt;/filter&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;
+				</code></pre>
+				</div>
 			</section>
 
 			<section>
