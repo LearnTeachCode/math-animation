@@ -80,19 +80,23 @@
 
 
 
-	var scrollY;
+	var mouseY;
 	var beginning = null;
-  function step(scrollY) {
-      if (!beginning) beginning = scrollY;
+	var isDrawing = false;
+
+  function step(mouseY) {
+      if (!beginning) beginning = mouseY;
 
       var propertyStart = 80;
       var propertyDestination = 130;
-      var progress = scrollY - beginning;
+      var progress = mouseY - beginning;
       var duration = 200;
 
    		// If we're done
 			if (progress > duration) {
-        return;
+        setTimeout(function() {
+        	requestAnimationFrame(step2);
+        }, 500);
       }
       var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
@@ -107,19 +111,30 @@
 
       console.log('--------------');
       console.log('beginning: ' + beginning);
-      console.log('scrollY: ' + scrollY);
+      console.log('mouseY: ' + mouseY);
       console.log('progress: ' + progress);
       console.log('nextValue: ' + nextValue);
 
 
     }
-		window.addEventListener('scroll', function() {
-			scrollY = getScrollY();
-			step(scrollY);
+
+		var mouseIsDown = false;
+		document.body.addEventListener('mousedown', function(event) {
+			mouseIsDown = true;
+		}, false);
+		document.body.addEventListener('mouseup', function(event) {
+			mouseIsDown = false;
 		}, false);
 
 
-
+		document.body.addEventListener('mousemove', function(event) {
+			mouseY = event.clientY;
+			console.log('mouseY: ' + mouseY);
+			if (mouseIsDown) {
+				console.log('event.buttons!');
+				step(mouseY);
+			}
+		}, false);
 
 
 	var beginning2 = null;
