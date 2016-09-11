@@ -95,10 +95,10 @@
 				//beginning2 = null;
 				//requestAnimationFrame(step2);
 
-				animateTo(130, 80, function(nextValue) {
+				animate(130, 80, function(nextValue) {
 					bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
 				});
-				animateTo(154, 99, function(nextValue) {
+				animate(154, 99, function(nextValue) {
 					spaceship.style.top = nextValue + 'px';
 				});
 			}, 500);
@@ -140,7 +140,7 @@
 	}, false);
 
 
-	function animateTo(propertyStart, propertyDestination, drawFrame, onFinish) {
+	function animate(propertyStart, propertyDestination, drawFrame, onFinish) {
 		var beginning;
 
 		function step(timestamp) {
