@@ -71,18 +71,29 @@
     // }
     // requestAnimationFrame(step);
 
+  // KUDOS: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
+  function getScrollY() {
+    var supportPageOffset = window.pageXOffset !== undefined;
+    var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+    return supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+  }
 
 
 
+	var scrollY;
 	var beginning = null;
-  function step(timestamp) {
-      if (!beginning) beginning = timestamp;
+  function step(scrollY) {
+      if (!beginning) beginning = scrollY;
 
       var propertyStart = 80;
       var propertyDestination = 130;
-      var progress = timestamp - beginning;
-      var duration = 1000;
+      var progress = scrollY - beginning;
+      var duration = 200;
 
+   		// If we're done
+			if (progress > duration) {
+        return;
+      }
       var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
       bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
@@ -96,19 +107,19 @@
 
       console.log('--------------');
       console.log('beginning: ' + beginning);
-      console.log('timestamp: ' + timestamp);
+      console.log('scrollY: ' + scrollY);
       console.log('progress: ' + progress);
       console.log('nextValue: ' + nextValue);
 
-   // If we're not done yet
-      if (progress < duration) {
-        requestAnimationFrame(step);
-      }
+
     }
-  document.addEventListener('click', function(e) {
-	  	beginning = null;
-		requestAnimationFrame(step);
-  }, false);
+		window.addEventListener('scroll', function() {
+			scrollY = getScrollY();
+			step(scrollY);
+		}, false);
+
+
+
 
 
 	var beginning2 = null;
@@ -142,8 +153,8 @@
         }
     }
   	document.addEventListener('dblclick', function(e) {
-		beginning2 = null;
-		requestAnimationFrame(step2);
+			beginning2 = null;
+			requestAnimationFrame(step2);
   	}, false);
 
 

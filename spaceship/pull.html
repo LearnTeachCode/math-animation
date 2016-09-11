@@ -237,7 +237,7 @@
 
   // If the user scrolls up and doesn’t reach the very top, snap the scroll position back to where the refresh is just out of view
 
-  // If the user scrolls up and does reach the top, wait until they stop scrolling (and the mouse/touch point is released) and then trigger the animation
+  // If the user scrolls up animate the curve to match their scroll position and does reach the top, wait until they stop scrolling (and the mouse/touch point is released) and then trigger the animation
 
   // Bonus points: Make the curve instensity increase as the negative scroll position increases (will this only affect iOS and Mac OS).
 
@@ -262,7 +262,6 @@
   window.addEventListener('scroll', function(e) {
     var scrollY = getScrollY();
     console.log('scrollY: ' + scrollY);
-
 
     if (refreshFullyVisible && userFinishedScrolling) {
       launchSpaceship();
