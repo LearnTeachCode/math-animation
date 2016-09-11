@@ -37,7 +37,7 @@
 	var mouseY;
 	var beginning = null;
 
-	var incompleteAnimation = false;
+	var readyForLaunch = false;
 
 	var SPACESHIP_START = 99;
 	var SPACESHIP_END = 154;
@@ -73,33 +73,28 @@
 	function step(mouseY) {
 		if (!beginning) beginning = mouseY;
 
-		var propertyStart = BRIDGESHAPE_START;
-		var propertyDestination = BRIDGESHAPE_END;
+		var propertyStart, propertyDestination, nextValue;
 		var progress = mouseY - beginning;
 		var duration = 200;
 
-		incompleteAnimation = true;
+		readyForLaunch = false;
 
 		// If we're done
 		if (progress > duration) {
-			setTimeout(function() {
-
-				// Animate things back to the top position
-				animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition);
-				animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition);
-			}, 500);
-			incompleteAnimation = false;
+			readyForLaunch = true;
 			return;
 		}
-		var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
+		// Animate the bridge
+		propertyStart = BRIDGESHAPE_START;
+		propertyDestination = BRIDGESHAPE_END;
+		nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 		setBridgeshapePosition(nextValue);
 
+		// Animate the spaceship
 		propertyStart = SPACESHIP_START;
 		propertyDestination = SPACESHIP_END;
-
 		nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
-
 		setSpaceshipPosition(nextValue);
 
 		console.log('--------------');
@@ -115,11 +110,10 @@
 	}, false);
 	document.body.addEventListener('mouseup', function(event) {
 		mouseIsDown = false;
-		if (incompleteAnimation) {
-			// Animate things back to the top position
-			animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition);
-			animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition);
-		}
+
+		// Animate things back to the top position
+		animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition);
+		animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition);
 	}, false);
 
 
