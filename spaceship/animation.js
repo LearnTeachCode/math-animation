@@ -65,7 +65,7 @@
     //   console.log('beginning: ' + beginning);
     //   console.log('timestamp: ' + timestamp);
     //   console.log('progress: ' + progress);
-    //   console.log('nextValue: ' + nextValue);      
+    //   console.log('nextValue: ' + nextValue);
 
     //   if (progress < duration) {
     //     requestAnimationFrame(step);
@@ -89,12 +89,18 @@
 
       bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
 
+	  propertyStart = 99;
+      propertyDestination = 154;
+
+      nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+
+	  spaceship.style.top = nextValue + 'px';
 
       console.log('--------------');
       console.log('beginning: ' + beginning);
       console.log('timestamp: ' + timestamp);
       console.log('progress: ' + progress);
-      console.log('nextValue: ' + nextValue);      
+      console.log('nextValue: ' + nextValue);
 
       if (progress < duration) {
         requestAnimationFrame(step);
