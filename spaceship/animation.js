@@ -1,20 +1,3 @@
-	// var refresh = document.querySelector('.refresh');
-	// document.body.className += ' inactive';
-	// setTimeout(function() {
-	//   document.body.className += ' animated';
-	// }, 1);
-
-	// document.body.addEventListener('click', function() {
-	//   document.body.className = document.body.className.replace(/inactive/g, '');
-	//   setTimeout(function() {
-	//     document.body.className += ' lift-off';
-	//     setTimeout(function() {
-	//       document.body.className += ' inactive';
-	//       document.body.className = document.body.className.replace(/lift-off/g, '');
-	//     }, 1000);
-	//   }, 1000);
-	// }, false);
-
 
 
 	// http://upshots.org/actionscript/jsas-understanding-easing
@@ -41,33 +24,6 @@
 		return c*(t/=d)*t*t*t*t + b;
 	}
 
-	var bridgeshape = document.getElementById('bridgeshape');
-
-	// function step(timestamp) {
-	//   if (!beginning) beginning = timestamp;
-
-	//   var propertyStart = 130;
-	//   var propertyDestination = 80;
-	//   var progress = timestamp - beginning;
-	//   var duration = 1000;
-
-	//   var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
-
-	//   bridgeshape.setAttribute('d', 'M 10 80 V 10 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 10 80');
-
-
-	//   console.log('--------------');
-	//   console.log('beginning: ' + beginning);
-	//   console.log('timestamp: ' + timestamp);
-	//   console.log('progress: ' + progress);
-	//   console.log('nextValue: ' + nextValue);
-
-	//   if (progress < duration) {
-	//     requestAnimationFrame(step);
-	//   }
-	// }
-	// requestAnimationFrame(step);
-
 	// KUDOS: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
 	function getScrollY() {
 		var supportPageOffset = window.pageXOffset !== undefined;
@@ -75,12 +31,19 @@
 		return supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
 	}
 
-
+	var spaceship = document.getElementById('spaceship');
+	var bridgeshape = document.getElementById('bridgeshape');
 
 	var mouseY;
 	var beginning = null;
 
 	var incompleteAnimation = false;
+
+	var SPACESHIP_START = 99;
+	var SPACESHIP_END = 154;
+
+	var BRIDGESHAPE_START = 80;
+	var BRIDGESHAPE_END = 130;
 
 	var setSpaceshipPosition, getSpaceshipPosition;
 	(function() {
@@ -110,8 +73,8 @@
 	function step(mouseY) {
 		if (!beginning) beginning = mouseY;
 
-		var propertyStart = 80;
-		var propertyDestination = 130;
+		var propertyStart = BRIDGESHAPE_START;
+		var propertyDestination = BRIDGESHAPE_END;
 		var progress = mouseY - beginning;
 		var duration = 200;
 
@@ -120,12 +83,10 @@
 		// If we're done
 		if (progress > duration) {
 			setTimeout(function() {
-				//beginning2 = null;
-				//requestAnimationFrame(step2);
 
 				// Animate things back to the top position
-				animate(getBridgeshapePosition(), 80, setBridgeshapePosition);
-				animate(getSpaceshipPosition(), 99, setSpaceshipPosition);
+				animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition);
+				animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition);
 			}, 500);
 			incompleteAnimation = false;
 			return;
@@ -134,8 +95,8 @@
 
 		setBridgeshapePosition(nextValue);
 
-		propertyStart = 99;
-		propertyDestination = 154;
+		propertyStart = SPACESHIP_START;
+		propertyDestination = SPACESHIP_END;
 
 		nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
@@ -156,8 +117,8 @@
 		mouseIsDown = false;
 		if (incompleteAnimation) {
 			// Animate things back to the top position
-			animate(getBridgeshapePosition(), 80, setBridgeshapePosition);
-			animate(getSpaceshipPosition(), 99, setSpaceshipPosition);
+			animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition);
+			animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition);
 		}
 	}, false);
 
@@ -171,14 +132,13 @@
 	}, false);
 
 
-	function animate(propertyStart, propertyDestination, drawFrame, onFinish) {
+	function animate(propertyStart, propertyDestination, duration, drawFrame, onFinish) {
 		var beginning;
 
 		function step(timestamp) {
 			if (!beginning) beginning = timestamp;
 
 			var progress = timestamp - beginning;
-			var duration = 1000;
 
 			var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
@@ -200,19 +160,3 @@
 	}
 
 
-	/*
-	var start = null;
-	var element = document.getElementById("SomeElementYouWantToAnimate");
-	element.style.position = 'absolute';
-
-	function step(timestamp) {
-		if (!start) start = timestamp;
-		var progress = timestamp - start;
-		element.style.left = Math.min(progress/10, 200) + "px";
-		if (progress < 2000) {
-			window.requestAnimationFrame(step);
-		}
-	}
-
-	window.requestAnimationFrame(step);
-	*/
