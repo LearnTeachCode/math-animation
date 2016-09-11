@@ -70,7 +70,34 @@
 			</section>
 
 			<section>
+				<h3>Easings</h3>
+				<img src="images/easings.png" width="500" alt="Easings" />
+				<p><a href="http://easings.net">http://easings.net</a></p>
+			</section>
+
+			<section>
 				<h3>Penner's equations</h3>
+
+<pre><code class="smaller" data-trim contenteditable="">
+function noEasing (t, b, c, d) {
+  return c * t / d + b;
+}
+</code></pre>
+				<p><a href="http://upshots.org/actionscript/jsas-understanding-easing">http://upshots.org/actionscript/jsas-understanding-easing</a></p>
+
+			</section>
+
+			<section>
+				<h3>jQuery easing functions (bounce)</h3>
+
+<pre><code class="smaller" data-trim contenteditable="">
+easeInOutBounce: function (x, t, b, c, d) {
+  if (t < d/2) return jQuery.easing.easeInBounce (x, t*2, 0, c, d) * .5 + b;
+  return jQuery.easing.easeOutBounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b;
+}
+</code></pre>
+				<p><a href="http://gsgd.co.uk/sandbox/jquery/easing/">http://gsgd.co.uk/sandbox/jquery/easing/</a></p>
+
 			</section>
 
 			<section>
