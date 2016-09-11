@@ -95,6 +95,7 @@
    		// If we're done
 			if (progress > duration) {
         setTimeout(function() {
+        	beginning2 = null;
         	requestAnimationFrame(step2);
         }, 500);
       }
