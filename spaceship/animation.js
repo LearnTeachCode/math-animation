@@ -79,7 +79,33 @@
 
 	var mouseY;
 	var beginning = null;
-	var isDrawing = false;
+
+	var incompleteAnimation = false;
+
+	var setSpaceshipPosition, getSpaceshipPosition;
+	(function() {
+		var currentValue;
+		setSpaceshipPosition = function(newValue) {
+			currentValue = newValue;
+			spaceship.style.top = currentValue + 'px';
+		}
+		getSpaceshipPosition = function() {
+			return currentValue;
+		}
+	})();
+
+	var setBridgeshapePosition, getBridgeshapePosition;
+	(function() {
+		var currentValue;
+		setBridgeshapePosition = function(newValue) {
+			currentValue = newValue;
+			bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + currentValue + ' 0 80');
+		}
+		getBridgeshapePosition = function() {
+			return currentValue;
+		}
+	})();
+
 
 	function step(mouseY) {
 		if (!beginning) beginning = mouseY;
@@ -89,31 +115,31 @@
 		var progress = mouseY - beginning;
 		var duration = 200;
 
+		incompleteAnimation = true;
+
 		// If we're done
 		if (progress > duration) {
 			setTimeout(function() {
 				//beginning2 = null;
 				//requestAnimationFrame(step2);
 
-				animate(130, 80, function(nextValue) {
-					bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
-				});
-				animate(154, 99, function(nextValue) {
-					spaceship.style.top = nextValue + 'px';
-				});
+				// Animate things back to the top position
+				animate(getBridgeshapePosition(), 80, setBridgeshapePosition);
+				animate(getSpaceshipPosition(), 99, setSpaceshipPosition);
 			}, 500);
+			incompleteAnimation = false;
 			return;
 		}
 		var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
-		bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
+		setBridgeshapePosition(nextValue);
 
 		propertyStart = 99;
 		propertyDestination = 154;
 
 		nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
-		spaceship.style.top = nextValue + 'px';
+		setSpaceshipPosition(nextValue);
 
 		console.log('--------------');
 		console.log('beginning: ' + beginning);
@@ -128,6 +154,11 @@
 	}, false);
 	document.body.addEventListener('mouseup', function(event) {
 		mouseIsDown = false;
+		if (incompleteAnimation) {
+			// Animate things back to the top position
+			animate(getBridgeshapePosition(), 80, setBridgeshapePosition);
+			animate(getSpaceshipPosition(), 99, setSpaceshipPosition);
+		}
 	}, false);
 
 
