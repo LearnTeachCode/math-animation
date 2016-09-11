@@ -113,8 +113,6 @@
 		console.log('mouseY: ' + mouseY);
 		console.log('progress: ' + progress);
 		console.log('nextValue: ' + nextValue);
-
-
 	}
 
 	var mouseIsDown = false;
@@ -140,31 +138,31 @@
 	function step2(timestamp) {
 	if (!beginning2) beginning2 = timestamp;
 
-			var propertyStart = 130;
-			var propertyDestination = 80;
-			var progress = timestamp - beginning2;
-			var duration = 1000;
+		var propertyStart = 130;
+		var propertyDestination = 80;
+		var progress = timestamp - beginning2;
+		var duration = 1000;
 
-			var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+		var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
-			bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
+		bridgeshape.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
 
-			propertyStart = 154;
-			propertyDestination = 99;
+		propertyStart = 154;
+		propertyDestination = 99;
 
-			nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+		nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
 
-			spaceship.style.top = nextValue + 'px';
+		spaceship.style.top = nextValue + 'px';
 
-			console.log('--------------');
-			console.log('beginning2: ' + beginning2);
-			console.log('timestamp: ' + timestamp);
-			console.log('progress: ' + progress);
-			console.log('nextValue: ' + nextValue);
+		console.log('--------------');
+		console.log('beginning2: ' + beginning2);
+		console.log('timestamp: ' + timestamp);
+		console.log('progress: ' + progress);
+		console.log('nextValue: ' + nextValue);
 
-			if (progress < duration) {
-				requestAnimationFrame(step2);
-			}
+		if (progress < duration) {
+			requestAnimationFrame(step2);
+		}
 	}
 	document.addEventListener('dblclick', function(e) {
 		beginning2 = null;
