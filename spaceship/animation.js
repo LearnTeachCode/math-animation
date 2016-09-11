@@ -35,7 +35,8 @@
 	})();
 
 
-	function addListeners() {
+	// Add listeners
+	(function() {
 		var mouseIsDown = false;
 
 		document.body.addEventListener('mousedown', function(event) {
@@ -56,7 +57,7 @@
 				animateByMouse(mouseY);
 			}
 		}, false);
-	}
+	})();
 
 
 	var animateByMouse;
@@ -157,8 +158,5 @@
 		return supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
 	}
 
-
-	// Start listening
-	addListeners();
 
 })();
