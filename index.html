@@ -245,6 +245,7 @@
 
 			</section>
 
+			<!--
 			<section>
 				<h3>Cubic bezier curves!! yayyy</h3>
 			</section>
@@ -252,6 +253,7 @@
 			<section>
 				<h3>Animating the line -- linear</h3>
 			</section>
+			-->
 
 			<section>
 				<h3>Easings</h3>
@@ -284,6 +286,7 @@ easeInOutBounce: function (x, t, b, c, d) {
 
 			</section>
 
+			<!--
 			<section>
 				<h3>maybe compare: linear vs ease </h3>
 			</section>
@@ -292,7 +295,9 @@ easeInOutBounce: function (x, t, b, c, d) {
 			<section>
 				<h3>Animating the spaceship to move with the line</h3>
 			</section>
+			-->
 
+			<!--
 			<section>
 				<h3>Particles!! Yay Bubbles</h3>
 
@@ -312,6 +317,42 @@ easeInOutBounce: function (x, t, b, c, d) {
 				</code></pre>
 				</div>
 
+			</section>
+			-->
+
+			<section>
+				<h3>Scroll to refresh</h3>
+				<img src="images/scroll.png" height="500" />
+			</section>
+
+			<section>
+				<h3>Listening to scroll position</h3>
+				<pre><code class="smaller" data-trim contenteditable="">
+window.addEventListener('scroll', function(e) {
+	var scrollY = getScrollY();
+	if (scrollY < refreshHeight) {
+		animateByScroll(scrollY);
+	}
+});
+				</code></pre>
+			</section>
+
+			<section>
+				<h3>Animating by scroll position</h3>
+				<pre><code class="smaller" data-trim contenteditable="">
+function animateByScroll(scrollY) {
+
+	var progress = refreshHeight - scrollY;
+	var duration = refreshHeight;
+
+	var propertyStart = 80;
+	var propertyDestination = 130;
+
+	nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+
+	svg.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
+}
+				</code></pre>
 			</section>
 
 			<section>
@@ -339,41 +380,6 @@ easeInOutBounce: function (x, t, b, c, d) {
 &lt;/svg&gt;
 				</code></pre>
 				</div>
-			</section>
-
-			<section>
-				<h3>Scroll to refresh</h3>
-				<img src="images/scroll.png" height="500" />
-			</section>
-
-			<section>
-				<h3>Animating by scroll position</h3>
-				<pre><code class="smaller" data-trim contenteditable="">
-function animateByScroll(scrollY) {
-
-	var progress = refreshHeight - scrollY;
-	var duration = refreshHeight;
-
-	var propertyStart = 80;
-	var propertyDestination = 130;
-
-	nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
-
-	svg.setAttribute('d', 'M 0 80 V 0 H 180 V 80 M180 80 Q 95 ' + nextValue + ' 0 80');
-}
-				</code></pre>
-			</section>
-
-			<section>
-				<h3>Listening to scroll position</h3>
-				<pre><code class="smaller" data-trim contenteditable="">
-window.addEventListener('scroll', function(e) {
-	var scrollY = getScrollY();
-	if (scrollY < refreshHeight) {
-		animateByScroll(scrollY);
-	}
-});
-				</code></pre>
 			</section>
 
 			<section>
