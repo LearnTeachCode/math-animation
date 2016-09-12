@@ -1,5 +1,8 @@
 	body {
 		margin: 0;
+		background: rgb(71, 79, 105);
+	}
+	.container {
 		background: rgb(92, 96, 129);
 	}
 
@@ -47,6 +50,22 @@
 		top: 99px;
 		left: 50%;
 		margin-left: -1.625em; /* 3.25 / 2 */
+	}
+
+	@keyframes shake {
+		0 {
+			transform: rotate(-1deg);
+		}
+		50% {
+			transform: rotate(1deg);
+		}
+		100% {
+			transform: rotate(-1deg);
+		}
+	}
+
+	.prelaunch-animation #spaceship {
+		animation: shake 0.1s infinite;
 	}
 
 	.animated .refresh {

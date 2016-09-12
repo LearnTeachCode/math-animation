@@ -5,7 +5,7 @@
 	var bridgeshape = document.getElementById('bridgeshape');
 	var spaceship   = document.getElementById('spaceship');
 
-	var startPosition = 0;
+	var refreshHeight = refresh.offsetHeight + 3; // Add a little extra to keep the spaceship out of view
 
 	var SPACESHIP_START = 99;
 	var SPACESHIP_END   = 198;
@@ -54,17 +54,6 @@
 	})();
 
 
-	// Scroll down enough for the refresh to be out of view
-
-	startPosition = refresh.offsetHeight;
-
-	window.addEventListener('load', function() {
-		setTimeout(function() {
-			window.scroll(0, startPosition + REFRESH_MARGIN_START);
-		}, 1);
-	}, false);
-
-
 	// Add listeners
 	/*
 	(function() {
@@ -92,54 +81,95 @@
 	})();
 	*/
 
-	(function() {
+	function initialize() {
+		var timer;
 		var scrollResetAnimation;
-		var autoScrolling = false;
+		var launching = false;
 		window.addEventListener('scroll', function(e) {
 			var scrollY = getScrollY();
-			//console.log('scrollY: ' + scrollY);
 
-			if (autoScrolling) return;
+			// Ignore scroll events if the launch is in progress
+			if (launching) return;
+
+			if (scrollY < refreshHeight) {
+				animateByScroll(scrollY);
+			}
+
+			// Scroll the refresh element out of sight again, after a delay
+			// (for the case where the user scrolls a little way, and then stops)
+			if (timer) clearTimeout(timer);
+			timer = setTimeout(function() {
+				launching = true;
+				animate(getBridgeshapePosition(), BRIDGESHAPE_START , 500, setBridgeshapePosition);
+				animate(getSpaceshipPosition(), SPACESHIP_START, 500, setSpaceshipPosition);
+				animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition);
+
+				animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
+					window.scroll(0, nextValue);
+				}, function() {
+					launching = false;
+				});
+			}, 2000);
 
 			if (scrollY <= 0) {
-				// Animate things back to the top position
-				/*
-				animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition);
-				animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition);
-				animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 1000, setRefreshMarginPosition);
 
-				setTimeout(function() {
-					if (scrollResetAnimation) scrollResetAnimation.stop();
-					scrollResetAnimation = animate(scrollY, startPosition, 1000, function(nextValue) {
-						window.scroll(0, nextValue);
-					}, function() {
-						setTimeout(function() {
-							autoScrolling = false;
-						}, 500);
-					});
-					autoScrolling = true;
-				}, 1000);
-				*/
+				document.body.classList.add('prelaunch-animation');
 
-			} else if (scrollY < startPosition) {
-				animateByScroll(scrollY * 2);
+				// Wait a half second
+				if (timer) clearTimeout(timer);
+				timer = setTimeout(function() {
+
+					launching = true;
+
+					// Launch!
+					animate(getBridgeshapePosition(), BRIDGESHAPE_START , 500, setBridgeshapePosition);
+					animate(getSpaceshipPosition(), SPACESHIP_START, 500, setSpaceshipPosition);
+					animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition);
+
+					document.body.classList.remove('prelaunch-animation');
+
+					// Scroll the refresh element out of sight again
+					if (timer) clearTimeout(timer);
+					timer = setTimeout(function() {
+
+						animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
+							window.scroll(0, nextValue);
+						}, function() {
+							launching = false;
+						});
+					}, 2000);
+
+				}, 500);
+
 			}
 
 		}, false);
-	})();
+	}
+
+
+	// Scroll down enough for the refresh to be out of view
+
+	window.addEventListener('load', function() {
+		setTimeout(function() {
+			window.scroll(0, refreshHeight + REFRESH_MARGIN_START);
+
+			// TRICKY: Wait for the automatic scrolling to be fininshed before initalizing the scroll event listeners
+			setTimeout(initialize, 100);
+		}, 1);
+	}, false);
+	window.scroll(0, refreshHeight + REFRESH_MARGIN_START);
+
 
 	var animateByScroll;
 	(function() {
-		var beginning = startPosition * -1;
 		animateByScroll = function(scrollY) {
-			//console.log('scrollY: ' + scrollY);
 
 			var propertyStart, propertyDestination, nextValue;
-			var progress = (scrollY * -1) - beginning;
-			var duration = 300;
+			var progress = refreshHeight - scrollY;
+			var duration = refreshHeight;
 
-			// If we're done
-			if (progress > duration) {
+			// If we've reached the top of the page
+			if (scrollY <= 0) {
 				return;
 			}
 
@@ -221,9 +251,7 @@
 			if (progress < duration && !stopAnimation) {
 				requestAnimationFrame(step);
 			} else {
-				if (stopAnimation) {
-					console.log('animation stopped');
-				}
+				drawFrame(propertyDestination);
 				if (onFinish) onFinish();
 				return;
 			}
@@ -244,7 +272,6 @@
 
 		return {
 			stop: function() {
-				console.log('stop animation');
 				stopAnimation = true;
 			}
 		}

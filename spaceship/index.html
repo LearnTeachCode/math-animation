@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<div class="container">
 
 	<header>
 		<h1>Messages</h1>
@@ -18,12 +19,12 @@
 	<div class="refresh">
 
 		<!-- https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths -->
-		<svg id="bridgecontainer" viewbox="0 0 180 160" width="180" height="160" xmlns="http://www.w3.org/2000/svg">
+		<svg id="bridgecontainer" viewbox="0 0 180 160" width="180" height="160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
 			<path id="bridgeshape" d="M 0 80 V 0 H 180 V 80 M180 80 Q 95 80 0 80" />
 		</svg>
 
 
-		<svg id="spaceship" xmlns="http://www.w3.org/2000/svg" width="52" height="80" viewBox="0 0 17.3 26.6">
+		<svg class="shapeship prelaunch-animation" id="spaceship" xmlns="http://www.w3.org/2000/svg" width="52" height="80" viewBox="0 0 17.3 26.6">
 			<!--
 				Created by Guilherme Simoes
 				from the Noun Project
@@ -115,7 +116,9 @@
 			<p>Proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 		</li>
 	</ul>
+</div><!-- /.container -->
 
-	<script src="animation.js"></script>
+<script src="animation.js"></script>
+
 </body>
 </html>
