@@ -67,8 +67,8 @@
 			mouseIsDown = false;
 
 			// Animate things back to the top position
-			animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition);
-			animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition);
+			animate(getBridgeshapePosition(), BRIDGESHAPE_START, 1000, setBridgeshapePosition, easeInQuint);
+			animate(getSpaceshipPosition(), SPACESHIP_START, 1000, setSpaceshipPosition, easeInQuint);
 		}, false);
 
 		document.body.addEventListener('mousemove', function(event) {
@@ -97,19 +97,19 @@
 
 			// Scroll the refresh element out of sight again, after a delay
 			// (for the case where the user scrolls a little way, and then stops)
-			if (timer) clearTimeout(timer);
-			timer = setTimeout(function() {
-				launching = true;
-				animate(getBridgeshapePosition(), BRIDGESHAPE_START , 500, setBridgeshapePosition);
-				animate(getSpaceshipPosition(), SPACESHIP_START, 500, setSpaceshipPosition);
-				animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition);
-
-				animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
-					window.scroll(0, nextValue);
-				}, function() {
-					launching = false;
-				});
-			}, 2000);
+			// if (timer) clearTimeout(timer);
+			// timer = setTimeout(function() {
+			// 	launching = true;
+			// 	animate(getBridgeshapePosition(), BRIDGESHAPE_START , 500, setBridgeshapePosition, easeInQuint);
+			// 	animate(getSpaceshipPosition(), SPACESHIP_START, 500, setSpaceshipPosition, easeInQuint);
+			// 	animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition, easeInQuint);
+			//
+			// 	animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, easeInQuint, function(nextValue) {
+			// 		window.scroll(0, nextValue);
+			// 	}, function() {
+			// 		launching = false;
+			// 	});
+			// }, 2000);
 
 			if (scrollY <= 0) {
 
@@ -122,22 +122,23 @@
 					launching = true;
 
 					// Launch!
-					animate(getBridgeshapePosition(), BRIDGESHAPE_START , 500, setBridgeshapePosition);
-					animate(getSpaceshipPosition(), SPACESHIP_START, 500, setSpaceshipPosition);
-					animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition);
+					animate(getBridgeshapePosition(), 80 , 1000, setBridgeshapePosition, easeOutElastic);
+					animate(getSpaceshipPosition(), -150, 1000, setSpaceshipPosition, easeOutQuint);
+					animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition, easeInQuint);
+
 
 					document.body.classList.remove('prelaunch-animation');
 
 					// Scroll the refresh element out of sight again
-					if (timer) clearTimeout(timer);
-					timer = setTimeout(function() {
-
-						animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
-							window.scroll(0, nextValue);
-						}, function() {
-							launching = false;
-						});
-					}, 2000);
+					// if (timer) clearTimeout(timer);
+					// timer = setTimeout(function() {
+					//
+					// 	animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
+					// 		window.scroll(0, nextValue);
+					// 	}, function() {
+					// 		launching = false;
+					// 	});
+					// }, 2000);
 
 				}, 500);
 
@@ -202,43 +203,43 @@
 	})();
 
 
-	var animateByMouse;
-	(function() {
-		var beginning;
-		animateByMouse = function(mouseY) {
-			if (!beginning) beginning = mouseY;
+	// var animateByMouse;
+	// (function() {
+	// 	var beginning;
+	// 	animateByMouse = function(mouseY) {
+	// 		if (!beginning) beginning = mouseY;
+	//
+	// 		var propertyStart, propertyDestination, nextValue;
+	// 		var progress = mouseY - beginning;
+	// 		var duration = 200;
+	//
+	// 		// If we're done
+	// 		if (progress > duration) {
+	// 			return;
+	// 		}
+	//
+	// 		// Animate the bridge
+	// 		propertyStart = BRIDGESHAPE_START;
+	// 		propertyDestination = BRIDGESHAPE_END;
+	// 		nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+	// 		setBridgeshapePosition(nextValue);
+	//
+	// 		// Animate the spaceship
+	// 		propertyStart = SPACESHIP_START;
+	// 		propertyDestination = SPACESHIP_END;
+	// 		nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+	// 		setSpaceshipPosition(nextValue);
+	//
+	// 		console.log('--------------');
+	// 		console.log('beginning: ' + beginning);
+	// 		console.log('mouseY: ' + mouseY);
+	// 		console.log('progress: ' + progress);
+	// 		console.log('nextValue: ' + nextValue);
+	// 	}
+	// })();
 
-			var propertyStart, propertyDestination, nextValue;
-			var progress = mouseY - beginning;
-			var duration = 200;
 
-			// If we're done
-			if (progress > duration) {
-				return;
-			}
-
-			// Animate the bridge
-			propertyStart = BRIDGESHAPE_START;
-			propertyDestination = BRIDGESHAPE_END;
-			nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
-			setBridgeshapePosition(nextValue);
-
-			// Animate the spaceship
-			propertyStart = SPACESHIP_START;
-			propertyDestination = SPACESHIP_END;
-			nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
-			setSpaceshipPosition(nextValue);
-
-			console.log('--------------');
-			console.log('beginning: ' + beginning);
-			console.log('mouseY: ' + mouseY);
-			console.log('progress: ' + progress);
-			console.log('nextValue: ' + nextValue);
-		}
-	})();
-
-
-	function animate(propertyStart, propertyDestination, duration, drawFrame, onFinish) {
+	function animate(propertyStart, propertyDestination, duration, drawFrame, easeFunction, onFinish) {
 		console.log('animate');
 		var beginning;
 		var stopAnimation = false;
@@ -256,7 +257,7 @@
 				return;
 			}
 
-			var nextValue = Math.floor(easeInQuint(progress, propertyStart, propertyDestination - propertyStart, duration));
+			var nextValue = Math.floor(easeFunction(progress, propertyStart, propertyDestination - propertyStart, duration));
 
 			drawFrame(nextValue);
 
@@ -299,11 +300,13 @@
 		return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
 	}
 
-
 	function easeInQuint (t, b, c, d) {
 		return c*(t/=d)*t*t*t*t + b;
 	}
 
+	function easeOutQuint (t, b, c, d) {
+		return c*((t=t/d-1)*t*t*t*t + 1) + b;
+	}
 
 	// KUDOS: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
 	function getScrollY() {
