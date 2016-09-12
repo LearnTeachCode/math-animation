@@ -6,8 +6,11 @@
 	header {
 		background: rgb(169, 206, 203);
 		min-height: 4.5em;
-		position: relative;
+		position: fixed;
 		z-index: 1;
+		top: 0;
+		left: 0;
+		width: 100%;
 	}
 	header h1 {
 		margin: 0;
@@ -18,12 +21,14 @@
 	.refresh {
 		background: rgb(71, 79, 105);
 		max-width: 25em;
+		margin-top: 4.5em;
 		margin-left: auto;
 		margin-right: auto;
 		/*padding: 1.5em;*/
 		text-align: center;
 		position: relative;
 		/* animate margin-top:-200px or something; */
+		margin-bottom: -180px
 	}
 
 	.refresh svg {
@@ -41,7 +46,7 @@
 		position: absolute;
 		top: 99px;
 		left: 50%;
-		margin-left: -1.125em;
+		margin-left: -1.625em; /* 3.25 / 2 */
 	}
 
 	.animated .refresh {
