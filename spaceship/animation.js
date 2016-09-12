@@ -124,7 +124,7 @@
 					// Launch!
 					animate(getBridgeshapePosition(), 80 , 1000, setBridgeshapePosition, easeOutElastic);
 					animate(getSpaceshipPosition(), -150, 1000, setSpaceshipPosition, easeOutQuint);
-					animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition, easeInQuint);
+					animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition, easeOutElastic);
 
 
 					document.body.classList.remove('prelaunch-animation');
