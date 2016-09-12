@@ -156,3 +156,9 @@
 	#bridgeshape {
 		fill: rgb(71, 79, 105);
 	}
+
+	.spaceship-container {
+		padding: 12px; /* Same value as the stdDeviation attribute of the SVG */
+		-webkit-filter: url("#blur");
+		filter: url("#blur");
+	}
