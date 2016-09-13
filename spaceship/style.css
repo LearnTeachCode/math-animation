@@ -104,7 +104,8 @@
 		max-width: 22em;
 		margin-left: auto;
 		margin-right: auto;
-		padding: 1.5em;
+		padding: 1.5em 1.5em 3em;
+		margin-bottom: 0;
 	}
 
 	li {
