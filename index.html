@@ -250,19 +250,40 @@
 			</section>
 
 			<section>
-				<h3> Drawing the SVG Line</h3>
+				<h3>Drawing the SVG Line</h3>
 
-				<div class="halves">
-					<iframe class="halves" style="height: 500px;" src="spaceship/step2.html"></iframe>
-				</div>
-				<div class="halves">
-					<pre><code class="smaller" data-trim contenteditable="">
-&lt;svg id=&quot;bridgecontainer&quot; viewbox=&quot;0 0 180 160&quot; width=&quot;180&quot; height=&quot;160&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
-&Tab;&lt;path id=&quot;bridgeshape&quot; d=&quot;M 0 80 V 0 H 180 V 80 M180 80 Q 95 130 0 80&quot; /&gt;
+				<svg width="240" height="240" viewbox="0 0 120 120">
+					<path d="M 10 60 Q 60 10, 110 60" stroke="black" fill="transparent"></path>
+				</svg>
+				<pre><code class="smaller" data-trim contenteditable="">
+&lt;svg width=&quot;240&quot; height=&quot;240&quot; viewbox=&quot;0 0 120 120&quot;&gt;
+	&lt;path d=&quot;M 10 60 Q 60 10, 110 60&quot; stroke=&quot;black&quot; &gt;&lt;/path&gt;
 &lt;/svg&gt;
 				</code></pre>
-				</div>
+			</section>
 
+			<section>
+				<h3>Quadratic curves have a control point</h3>
+
+				<svg width="240" height="240" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+					<path d="M 10 60 Q 60 10, 110 60" stroke="black" fill="transparent"></path>
+					<path d="M 10 60 L 60 10 L 110 60" stroke="blue" fill="transparent"></path>
+					<circle fill="blue" cx="10" cy="60" r="5"></circle>
+					<circle fill="blue" cx="60" cy="10" r="5"></circle>
+					<circle fill="blue" cx="110" cy="60" r="5"></circle>
+				</svg>
+			</section>
+
+			<section>
+				<h3>As the point moves, the curve moves with it</h3>
+
+				<svg width="240" height="240" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+					<path d="M 10 60 Q 60 110, 110 60" stroke="black" fill="transparent"></path>
+					<path d="M 10 60 L 60 110 L 110 60" stroke="blue" fill="transparent"></path>
+					<circle fill="blue" cx="10" cy="60" r="5"></circle>
+					<circle fill="blue" cx="60" cy="110" r="5"></circle>
+					<circle fill="blue" cx="110" cy="60" r="5"></circle>
+				</svg>
 			</section>
 
 			<!--
