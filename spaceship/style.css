@@ -31,7 +31,8 @@
 		text-align: center;
 		position: relative;
 		/* animate margin-top:-200px or something; */
-		margin-bottom: -180px
+		margin-bottom: -176px;
+		overflow: hidden;
 	}
 
 	.refresh svg {

@@ -97,19 +97,24 @@
 
 			// Scroll the refresh element out of sight again, after a delay
 			// (for the case where the user scrolls a little way, and then stops)
-			// if (timer) clearTimeout(timer);
-			// timer = setTimeout(function() {
-			// 	launching = true;
-			// 	animate(getBridgeshapePosition(), BRIDGESHAPE_START , 500, setBridgeshapePosition, easeInQuint);
-			// 	animate(getSpaceshipPosition(), SPACESHIP_START, 500, setSpaceshipPosition, easeInQuint);
-			// 	animate(getRefreshMarginPosition(), REFRESH_MARGIN_START, 500, setRefreshMarginPosition, easeInQuint);
-			//
-			// 	animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, easeInQuint, function(nextValue) {
-			// 		window.scroll(0, nextValue);
-			// 	}, function() {
-			// 		launching = false;
-			// 	});
-			// }, 2000);
+			if (timer) clearTimeout(timer);
+			timer = setTimeout(function() {
+				launching = true;
+			
+				animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
+					window.scroll(0, nextValue);
+				},
+				easeInQuint,
+				function() {
+					launching = false;
+
+					// Reset everything
+					setSpaceshipPosition(SPACESHIP_START);
+					setBridgeshapePosition(BRIDGESHAPE_START);
+					setRefreshMarginPosition(REFRESH_MARGIN_START);
+					document.getElementById('spaceship-group').setAttribute('filter', null);
+				});
+			}, 350);
 
 			if (scrollY <= 0) {
 
@@ -133,15 +138,23 @@
 					document.body.classList.remove('prelaunch-animation');
 
 					// Scroll the refresh element out of sight again
-					// if (timer) clearTimeout(timer);
-					// timer = setTimeout(function() {
-					//
-					// 	animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
-					// 		window.scroll(0, nextValue);
-					// 	}, function() {
-					// 		launching = false;
-					// 	});
-					// }, 2000);
+					if (timer) clearTimeout(timer);
+					timer = setTimeout(function() {
+						animate(scrollY, refreshHeight + REFRESH_MARGIN_START, 500, function(nextValue) {
+							window.scroll(0, nextValue);
+						},
+						easeInQuint,
+						function() {
+
+							launching = false;
+
+							// Reset everything
+							setSpaceshipPosition(SPACESHIP_START);
+							setBridgeshapePosition(BRIDGESHAPE_START);
+							setRefreshMarginPosition(REFRESH_MARGIN_START);
+							document.getElementById('spaceship-group').setAttribute('filter', null);
+						});
+					}, 500);
 
 				}, 500);
 
@@ -243,7 +256,6 @@
 
 
 	function animate(propertyStart, propertyDestination, duration, drawFrame, easeFunction, onFinish) {
-		console.log('animate');
 		var beginning;
 		var stopAnimation = false;
 
