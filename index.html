@@ -404,14 +404,6 @@ function animateByScroll(scrollY) {
 				</div>
 				<div class="halves">
 					<pre><code class="smaller" data-trim contenteditable="">
-&lt;style&gt;
-.spaceship-container {
-  padding: 12px; /* Same value as the stdDeviation attribute of the SVG */
-  -webkit-filter: url(&quot;#blur&quot;);
-  filter: url(&quot;#blur&quot;);
-}
-&lt;/style&gt;
-
 &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot;&gt;
   &lt;defs&gt;
 &Tab;&lt;filter id=&quot;blur&quot;&gt;
@@ -419,6 +411,9 @@ function animateByScroll(scrollY) {
 &Tab;&lt;/filter&gt;
   &lt;/defs&gt;
 &lt;/svg&gt;
+&lt;g id=&quot;spaceship-group&quot; filter=&quot;url(#blur)&quot;&gt;
+	&lt;!-- path data is in here --&gt;
+&lt;/g&gt;
 				</code></pre>
 				</div>
 			</section>
