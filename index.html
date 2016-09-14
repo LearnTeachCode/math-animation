@@ -66,12 +66,13 @@
 			</section>
 
 			<section>
+        <h2>Steps</h2>
 				<ol>
-					<li>Create the page elements with HTML and CSS</li>
-          <li>Draw curves and illustrations with SVG</li>
-					<li>Create life-like animations with easing equations</li>
-          <li>Add a motion blur</li>
-					<li>Let the user control the animation with browser events</li>
+					<li>Create the basic page elements with HTML and CSS.</li>
+          <li>Draw the graphics with SVG.</li>
+					<li>Use Penner’s easing equations to add animation.</li>
+          <li>Add a motion blur.</li>
+					<li>Add interaction with browser events.</li>
 				</ol>
 			</section>
 
@@ -108,9 +109,6 @@
 			<section>
 				<h2>SVG</h2>
 				<h3>Scalable Vector Graphics for the web!</h3>
-			</section>
-
-			<section>
 				<ul>
 					<li>SVG images look beautiful at any size or pixel density.</li>
 					<li>An SVG image is just a text file.</li>
@@ -240,7 +238,7 @@
 			<section>
 				<h2>Draw your launch pad</h2>
 				<svg style="width: 100%" width="360" height="240" viewbox="0 0 120 80">
-					<path d="M 10 60 Q 60 10, 110 60" stroke="black" stroke-width="4" fill="transparent"></path>
+					<path d="M 10 60 Q 60 80, 110 60" stroke="black" stroke-width="4" fill="transparent"></path>
 				</svg>
 			</section>
 
@@ -281,7 +279,7 @@
 			</section>
 
 			<section>
-				<h2>As the control point moves, the curve moves with it.</h2>
+				<h2>As the control point moves, the curve moves&nbsp;with&nbsp;it.</h2>
 
 				<svg width="240" height="240" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
 					<path d="M 10 60 Q 60 110, 110 60" stroke="black" fill="transparent"></path>
@@ -303,19 +301,19 @@
 			-->
 
 			<section>
-				<h2>Animating with easing equations</h2>
+				<h2>Animating with easing functions</h2>
 				<p><a href="http://robertpenner.com/easing/">http://robertpenner.com/easing/</a></p>
 			</section>
 
-			<section>
-				<h2>Easing equations visualized</h2>
-				<img src="images/easings.png" width="500" alt="Easings" />
-				<p><a href="http://easings.net">http://easings.net</a></p>
-			</section>
+      <section>
+        <h2>Objects in real life … almost never move at a constant speed.</h2>
+        <p>Easing functions specify the rate of change of a parameter over time.</p>
+        <p><a href="http://easings.net">http://easings.net</a></p>
+      </section>
 
 			<section>
 				<h2>Linear</h2>
-				<img src="images/easings/linear.png" width="500" alt="Linear" />
+				<img src="images/easings/linear.png" width="400" alt="Linear" />
 <pre><code class="smaller" data-trim contenteditable="">
 function linear (t, b, c, d) {
   return c * (t / d) + b;
@@ -325,7 +323,7 @@ function linear (t, b, c, d) {
 
 			<section>
 				<h2>Ease In</h2>
-				<img src="images/easings/ease-in-quint.png" width="500" alt="Ease in Quint" />
+				<img src="images/easings/ease-in-quint.png" width="400" alt="Ease in Quint" />
 <pre><code class="smaller" data-trim contenteditable="">
 function easeInQuint (t, b, c, d) {
   return c*(t/=d)*t*t*t*t + b;
@@ -335,7 +333,7 @@ function easeInQuint (t, b, c, d) {
 
 			<section>
 				<h2>Ease Out Elastic</h2>
-				<img src="images/easings/ease-in-out-elastic.png" width="500" alt="Ease In Out Elastic" />
+				<img src="images/easings/ease-in-out-elastic.png" width="400" alt="Ease In Out Elastic" />
 <pre><code class="smaller" data-trim contenteditable="">
 function easeOutElastic (t, b, c, d) {
   var s=1.70158;var p=0;var a=c;
@@ -346,6 +344,12 @@ function easeOutElastic (t, b, c, d) {
 }
 </code></pre>
 </section>
+
+      <section>
+        <h2>Easing functions visualized</h2>
+        <img src="images/easings.png" width="500" alt="Easings" />
+        <p><a href="http://easings.net">http://easings.net</a></p>
+      </section>
 
 			<section>
 				<h2>Understanding Easing</h2>
@@ -461,32 +465,35 @@ function animateByScroll(scrollY) {
 			  <iframe style="height: 200px;" src="spaceship/motion.html"></iframe>
 
 					<pre><code class="smaller" data-trim contenteditable="">
-&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot;&gt;
+&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
   &lt;defs&gt;
-  &lt;filter id=&quot;blur&quot;&gt;
-    &lt;feGaussianBlur in=&quot;SourceGraphic&quot; stdDeviation=&quot;0,12&quot; /&gt;
-  &lt;/filter&gt;
+    &lt;filter id=&quot;blur&quot;&gt;
+      &lt;feGaussianBlur in=&quot;SourceGraphic&quot; stdDeviation=&quot;0,12&quot; /&gt;
+    &lt;/filter&gt;
   &lt;/defs&gt;
+
+  &lt;g filter=&quot;url(#blur)&quot;&gt;
+    &lt;!-- path data is in here --&gt;
+  &lt;/g&gt;
 &lt;/svg&gt;
-&lt;g filter=&quot;url(#blur)&quot;&gt;
-  &lt;!-- path data is in here --&gt;
-&lt;/g&gt;
 				</code></pre>
 			</section>
 
       <section>
         <h2>Putting it all together</h2>
-
+        <ul>
+          <li>HTML and CSS for page elements</li>
+          <li>SVG for drawing elements like curves and effects like motion blur</li>
+          <li>Penner’s easing equations for life-like animation</li>
+          <li>Scroll-driven animation</li>
+        </ul>
       </section>
 
 			<section>
 				<h2>Our Finished Code!</h2>
 				<p><a href="http://codepen.io/LearnToCodeLA/pen/WGAGbW">http://codepen.io/LearnToCodeLA/pen/WGAGbW</a></p>
 
-				<iframe class="noshadow noborder" height='600' scrolling='no' src='http://codepen.io/LearnToCodeLA/embed/WGAGbW/?height=500&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/LearnToCodeLA/pen/WGAGbW/'>WGAGbW</a> by Learn to Code LA (<a href='http://codepen.io/LearnToCodeLA'>@LearnToCodeLA</a>) on <a href='http://codepen.io'>CodePen</a>.
-</iframe>
-
-
+				<iframe class="noshadow noborder" height='600' scrolling='no' src='http://codepen.io/LearnToCodeLA/embed/WGAGbW/?height=500&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/LearnToCodeLA/pen/WGAGbW/'>WGAGbW</a> by Learn to Code LA (<a href='http://codepen.io/LearnToCodeLA'>@LearnToCodeLA</a>) on <a href='http://codepen.io'>CodePen</a>.</iframe>
 			</section>
 
 			<!-- 	COMMON ELEMENTS:
@@ -551,7 +558,9 @@ REMEMBER TO KEEP IT ALL THE WAY TO THE LEFT!
 	</div><!-- END .reveal -->
 
 	<footer class="branding">
+    <!--
 		<a class="button" href="#">Sample Code</a>
+    -->
 		<cite>By <a href="https://twitter.com/LearningNerd">Liz Krane</a> and <a href="https://twitter.com/jimthoburn">Jim Thoburn</a> for <a href="http://www.meetup.com/LearnToCodeLA/">Learn to Code LA</a></cite>
 	</footer>
 
