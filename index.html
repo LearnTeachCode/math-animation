@@ -68,7 +68,7 @@
 			<section>
         <h2>Steps</h2>
 				<ol>
-					<li>Create the basic page elements with HTML and CSS.</li>
+					<li>Create the page elements with HTML and CSS.</li>
           <li>Draw the graphics with SVG.</li>
 					<li>Make life-like animation with Penner’s easing equations.</li>
           <li>Add a motion blur.</li>
@@ -302,6 +302,9 @@
 
 			<section>
 				<h2>Animating with easing functions</h2>
+        <!--
+        <p>Robert Pennner wrote these for ActionScript in Flash, but they work just as well in JavaScript.</p>
+        -->
 				<p><a href="http://robertpenner.com/easing/">http://robertpenner.com/easing/</a></p>
 			</section>
 
@@ -350,11 +353,6 @@ function easeOutElastic (t, b, c, d) {
         <img src="images/easings.png" width="500" alt="Easings" />
         <p><a href="http://easings.net">http://easings.net</a></p>
       </section>
-
-			<section>
-				<h2>Understanding Easing</h2>
-				<p><a href="http://upshots.org/actionscript/jsas-understanding-easing">http://upshots.org/actionscript/jsas-understanding-easing</a></p>
-			</section>
 
 				<!--
 				<p><a href="http://gsgd.co.uk/sandbox/jquery/easing/">http://gsgd.co.uk/sandbox/jquery/easing/</a></p>
@@ -421,7 +419,7 @@ function easeInOutBounce (t, b, c, d) {
 			</section>
 
 			<section>
-				<h2>Scroll to refresh</h2>
+				<h2>Scroll-based animation</h2>
 				<img src="images/scroll.png" height="500" />
 			</section>
 
@@ -482,10 +480,13 @@ function animateByScroll(scrollY) {
       <section>
         <h2>Putting it all together</h2>
         <ul>
-          <li>HTML and CSS for page elements</li>
-          <li>SVG for drawing elements like curves and effects like motion blur</li>
-          <li>Penner’s easing equations for life-like animation</li>
-          <li>Scroll-driven animation</li>
+          <li>Create your page with HTML, CSS and JavaScript</li>
+          <li>
+            Use SVG for do draw more complicated elements like curves,<br />
+            and to add effects like motion blur
+          </li>
+          <li>Make life-like animation with Penner’s easing equations.</li>
+          <li>Listen for scroll events and use them as triggers for the animation.</li>
         </ul>
       </section>
 
@@ -495,6 +496,12 @@ function animateByScroll(scrollY) {
 
 				<iframe class="noshadow noborder" height='600' scrolling='no' src='http://codepen.io/LearnToCodeLA/embed/WGAGbW/?height=500&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/LearnToCodeLA/pen/WGAGbW/'>WGAGbW</a> by Learn to Code LA (<a href='http://codepen.io/LearnToCodeLA'>@LearnToCodeLA</a>) on <a href='http://codepen.io'>CodePen</a>.</iframe>
 			</section>
+
+      <section>
+        <h2>Futher Reading</h2>
+        <h3>Understanding Easing</h3>
+        <p><a href="http://upshots.org/actionscript/jsas-understanding-easing">http://upshots.org/actionscript/jsas-understanding-easing</a></p>
+      </section>
 
 			<!-- 	COMMON ELEMENTS:
 				<h2 class="subhead"></h2>
