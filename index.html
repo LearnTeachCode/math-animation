@@ -472,6 +472,7 @@ REMEMBER TO KEEP IT ALL THE WAY TO THE LEFT!
 
 	<script>
 	Reveal.initialize({
+        history: true,
 		dependencies: [
 			{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 			{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } }
